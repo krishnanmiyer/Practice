@@ -20,7 +20,7 @@ namespace ConsoleApp1
             //int capacity = 20;
 
             //Console.WriteLine(maxDuffelBagValue(cakeTypes, capacity));
-             
+
             //int[] ids = new int[5] { 1, 2, 1, 2, 4};
             //Console.WriteLine(uniqueId(ids));
 
@@ -73,13 +73,69 @@ namespace ConsoleApp1
 
             //Permute("abc", 0, 2);
 
-            //SubArrayWithNegative(new int[] { 2, 4, 5, -8, 10 }, -8);
 
-            //MaxSubArraySum(new int[] { 2, 4, 5, -8, 10 });
+            MaxSubArraySum(new int[] { 2, 4, 5, -8, 10 });
 
-            MaxContiguousSubArraySum(new int[] { 2, 4, 5, -8, 10 });
+            //MaxContiguousSubArraySum(new int[] { 2, 4, 5, -8, 10 });
+
+            //FibonacciIterative(10);
+            //FibonacciRecursive();
+            //FibonacciMemoization(10);
 
             Console.ReadLine();  
+        }
+
+        public static void FibonacciIterative(int n)
+        {
+            int f1 = 0;
+            int f2 = 0;
+
+            for (var i = 0; i <= n; i++)
+            {
+                if (i < 2)
+                {
+                    Console.Write(i);
+                    f1 = 0;
+                    f2 = i;
+                }
+                else
+                {
+                    var f3 = f1 + f2;
+                    f1 = f2;
+                    f2 = f3;
+                    Console.Write(f3);
+                }
+            }
+        }
+
+        public static void FibonacciRecursive()
+        {
+            for (var i = 0; i <=10; i++)
+            {
+                Console.Write(FibonacciRecursive(i));
+            }
+        }
+
+        public static int FibonacciRecursive(int n)
+        {
+            if (n < 2)
+            {
+                return n;
+            }
+            return FibonacciRecursive(n - 1) + FibonacciRecursive(n - 2);         
+        }
+
+        public static int FibonacciMemoization(int n)
+        {
+            var fibo = new int[n + 1];
+            fibo[0] = 0;
+            fibo[1] = 1;
+
+            for (var i = 2; i <= n; i++)
+            {
+                fibo[i] = fibo[i - 1] + fibo [i - 2];
+            }
+            return fibo[n];
         }
 
         public static int SubArraySum(int[] a, int k)
@@ -401,6 +457,28 @@ namespace ConsoleApp1
             return BinarySearch(values, value, l, mid - 1);
         }
 
+        private static bool BinarySearchTreeV2(int[] a, int l, int r, int x)
+        {
+            if (a == null || a.Length < 1) return false;
+
+            if (l > r) return false;
+
+            var m = (l + r) / 2;
+
+            if (a[m] == x)
+            {
+                return true;
+            }
+            else if (a[m] < x)
+            {
+                return BinarySearchTreeV2(a, 0, m - 1, x);
+            }
+            else if (a[m] > x)
+            {
+                return BinarySearchTreeV2(a, m + 1, r, x);
+            }
+            return false;
+        }
 
         public class LinkedListNode
         {
@@ -692,6 +770,31 @@ namespace ConsoleApp1
 
             return auxillary[s1.Length, s2.Length];
         }
+
+        public class BSTNode
+        {
+            public BSTNode(int v)
+            {
+                Value = v;
+            }
+
+            int Value;
+            public BSTNode Left;
+            public BSTNode Right;
+        }
+
+        private static BSTNode BuildBSTFromSortedArray(int[] a, BSTNode root, int i)
+        {
+            if (i >= a.Length) return root;
+
+            root = new BSTNode(a[i]);
+
+            root.Left = BuildBSTFromSortedArray(a, root.Left, 2 * (i + 1));
+            root.Right = BuildBSTFromSortedArray(a, root.Right, 2 * (i + 2));
+
+            return root;
+        }
+
     }
 
 
@@ -707,4 +810,6 @@ namespace ConsoleApp1
         }
 
     }
+
+
 }
