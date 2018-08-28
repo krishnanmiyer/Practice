@@ -91,6 +91,30 @@ namespace ConsoleApp1
             Console.ReadLine();  
         }
 
+        private static void TestTrie()
+        {
+            var dic = new Trie();
+            dic.Insert("abc");
+            dic.InsertR("abcde");
+            dic.Insert("lmn");
+
+            var result = dic.Search("abc");
+            Console.WriteLine(result);
+
+            result = dic.Search("abcd");
+            Console.WriteLine(result);
+
+            result = dic.SearchR("lmn");
+            Console.WriteLine(result);
+        }
+
+        private static void TestWorkBreak()
+        {
+            var wb = new WordBreak();
+            var result = wb.BuildSentence("ilikesamsung");
+            Console.WriteLine(result);
+        }
+
         public static string FindPairs(int[] a)
         {
             var result = new List<int>();
