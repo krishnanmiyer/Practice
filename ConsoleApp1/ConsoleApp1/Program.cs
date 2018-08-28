@@ -21,8 +21,8 @@ namespace ConsoleApp1
 
             //Console.WriteLine(maxDuffelBagValue(cakeTypes, capacity));
 
-            //int[] ids = new int[5] { 1, 2, 1, 2, 4};
-            //Console.WriteLine(uniqueId(ids));
+            int[] ids = new int[5] { 1, 2, 1, 2, 4};
+            Console.WriteLine(uniqueId(ids));
 
             //int[] denominations = new int[] { 1, 5, 10, 25 };
             //Console.WriteLine(changePossibilitiesBottomUp(10, denominations));
@@ -74,7 +74,7 @@ namespace ConsoleApp1
             //Permute("abc", 0, 2);
 
 
-            MaxSubArraySum(new int[] { 2, 4, 5, -8, 10 });
+            //MaxSubArraySum(new int[] { 2, 4, 5, -8, 10 });
 
             //MaxContiguousSubArraySum(new int[] { 2, 4, 5, -8, 10 });
 
@@ -82,7 +82,42 @@ namespace ConsoleApp1
             //FibonacciRecursive();
             //FibonacciMemoization(10);
 
+            //var result = FindPairs(new int[] { 2, 3, 5, 6, -3, -5, -2 });
+
+            var result = MakePalindrome("abcdce");
+
+            Console.WriteLine(result);
+
             Console.ReadLine();  
+        }
+
+        public static string FindPairs(int[] a)
+        {
+            var result = new List<int>();
+            for (var i = 0; i < a.Length - 1; i++)
+            {
+                for (var j = i + 1; j < a.Length; j++)
+                {
+                    if (Math.Abs(a[i]) == Math.Abs(a[j]))
+                    {
+                        result.Add(a[i]);
+                    }
+                }
+            }
+            return string.Join(",", result);
+        }
+
+        public static string MakePalindrome(string s)
+        {
+            var removed = string.Empty;
+            for (var i = 0; i < s.Length; i++)
+            {
+                if (IsPalindrome(s)) return removed;
+                removed = s.Substring(0, i + 1);
+                s = s.Substring(i + 1);
+            }
+
+            return removed;
         }
 
         public static void FibonacciIterative(int n)
@@ -321,7 +356,7 @@ namespace ConsoleApp1
 
             for (var i = 0; i < s.Length; i++)
             {
-                if (s[i] == ' ')
+                if (s[i] == ' ' || i == s.Length -1)
                 {
                     newString = newString + ' ' + temp;
                     temp = "";
@@ -795,6 +830,45 @@ namespace ConsoleApp1
             return root;
         }
 
+        public int getBiggestRegion(int[,] a, int cols, int rows)
+        {
+            if (a.GetLength(0) < 1 || a.GetLength(1) < 1 || a == null) return 0;
+
+            var maxSize = 0;
+
+            for(var i = 0; i < a.GetLength(0); i++)
+            {
+                for (var j = 0; j < a.GetLength(1); j++)
+                {
+                    if (a[i,j] == 1)
+                    {
+                        var currentSize = getNeighbourSize(a, i, j);
+                        maxSize = Math.Max(currentSize, maxSize);
+                    }
+                }
+            }
+            return maxSize;
+        }
+
+        public int getNeighbourSize(int[,] a, int row, int col)
+        {
+            if (row >= a.GetLength(0) || col >= a.GetLength(1) || row < 0 || col < 0) return 0;
+
+            if (a[row, col] == 0) return 0;
+
+            int maxSize = 1;
+ 
+            a[row, col] = 0;
+    
+            for (var i = row - 1; i <= row + 1; i++)
+            {
+                for (var j = col - 1 ; j <= col + 1; j++)
+                {
+                    maxSize += getNeighbourSize(a, i, j);
+                }
+            }
+            return maxSize;
+        }
     }
 
 
@@ -811,5 +885,6 @@ namespace ConsoleApp1
 
     }
 
+   
 
 }
