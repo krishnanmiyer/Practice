@@ -21,8 +21,8 @@ namespace ConsoleApp1
 
             //Console.WriteLine(maxDuffelBagValue(cakeTypes, capacity));
 
-            int[] ids = new int[5] { 1, 2, 1, 2, 4};
-            Console.WriteLine(uniqueId(ids));
+            //int[] ids = new int[5] { 1, 2, 1, 2, 4};
+            //Console.WriteLine(uniqueId(ids));
 
             //int[] denominations = new int[] { 1, 5, 10, 25 };
             //Console.WriteLine(changePossibilitiesBottomUp(10, denominations));
@@ -84,12 +84,58 @@ namespace ConsoleApp1
 
             //var result = FindPairs(new int[] { 2, 3, 5, 6, -3, -5, -2 });
 
-            var result = MakePalindrome("abcdce");
+            //var result = MakePalindrome("abcdce");
 
+            var result = TileProblem.IsTileValid("foozbarz", new string[]{ "fo", "bz", "rz" });
             Console.WriteLine(result);
 
             Console.ReadLine();  
         }
+
+
+        public static bool IsValid(String s)
+        {
+            if (s == null || s.Length < 1) return true;
+            Stack<char> a = new Stack<char>();
+            int i = 0;
+            while (i < s.Length)
+            {
+                if (s[i] == '(')
+                {
+                    a.Push(')');
+                }
+                else if (s[i] == '[')
+                {
+                    a.Push(']');
+                }
+                else if (s[i] == '{')
+                {
+                    a.Push('}');
+                }
+                else if ((s[i] == ')' || s[i] == ']' || s[i] == '}') && (a.Count < 1 || s[i] != a.Pop()))
+                {
+                    return false;
+                }
+
+                i++;
+            }
+            return a.Count == 0;
+        }
+
+
+        private char getClosure(char s)
+        {
+            switch (s)
+            {
+                case '[':
+                    return ']';
+                case '{':
+                    return '}';
+                default:
+                    return ')';
+            }
+        }
+
 
         private static void TestTrie()
         {
@@ -908,7 +954,5 @@ namespace ConsoleApp1
         }
 
     }
-
-   
 
 }
