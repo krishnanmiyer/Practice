@@ -37,6 +37,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Sorting.cs" />
     <Compile Include="TileProblem.cs" />
     <Compile Include="TwoDArray.cs" />
     <Compile Include="Heap.cs" />

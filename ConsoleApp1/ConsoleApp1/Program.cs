@@ -86,8 +86,20 @@ namespace ConsoleApp1
 
             //var result = MakePalindrome("abcdce");
 
-            var result = TileProblem.IsTileValid("foozbarz", new string[]{ "fo", "bz", "rz" });
-            Console.WriteLine(result);
+            //var result = TileProblem.IsTileValid("foozbarz", new string[]{ "fo", "bz", "rz" });
+
+
+            var sort = new Sorting();
+            int[] input = new int[] { 100, 4, 67, 8, 97, 0 };
+            sort.MergeSort(input, 0, 5);
+
+            for(int i = 0; i < input.Length; i++)
+            {
+                Console.WriteLine(input[i]);
+            }
+
+
+            //Console.WriteLine(result);
 
             Console.ReadLine();  
         }
