@@ -60,7 +60,7 @@ namespace ConsoleApp1
             if (Capacity == Size)
             {
                 Array.Copy(items, items, Capacity * 2);
-                Capacity = Capacity * 2;
+                Capacity *= 2;
             }
         }
 

@@ -54,5 +54,37 @@
                 input[i] = temp[i - start];
             }
         }
+
+        public void QuickSort(int[] input, int low, int high)
+        {
+            if (low >= high) return;
+
+            int p = partition(input, low, high);
+
+            QuickSort(input, low, p - 1);
+            QuickSort(input, p + 1, high);
+        }
+
+        private int partition(int[] input, int low, int high)
+        {
+            int p = input[high];
+            int i = low; int temp;
+            for(int j = low; j < high; j++)
+            {
+                if (input[j] <= p)
+                {
+                    temp = input[i];
+                    input[i] = input[j];
+                    input[j] = temp;
+                    i++;
+                }
+            }
+            
+            temp = input[i + 1];
+            input[i + 1] = input[high];
+            input[high] = temp;
+
+            return i + 1;
+        }
     }
 }

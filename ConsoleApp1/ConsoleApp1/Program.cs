@@ -73,7 +73,6 @@ namespace ConsoleApp1
 
             //Permute("abc", 0, 2);
 
-
             //MaxSubArraySum(new int[] { 2, 4, 5, -8, 10 });
 
             //MaxContiguousSubArraySum(new int[] { 2, 4, 5, -8, 10 });
@@ -88,19 +87,25 @@ namespace ConsoleApp1
 
             //var result = TileProblem.IsTileValid("foozbarz", new string[]{ "fo", "bz", "rz" });
 
+            //var sort = new Sorting();
+            //int[] input = new int[] { 100, 4, 67, 8, 97, 0 };
+            //sort.MergeSort(input, 0, 5);
 
-            var sort = new Sorting();
-            int[] input = new int[] { 100, 4, 67, 8, 97, 0 };
-            sort.MergeSort(input, 0, 5);
+            //for(int i = 0; i < input.Length; i++)
+            //{
+            //    Console.WriteLine(input[i]);
+            //}
 
-            for(int i = 0; i < input.Length; i++)
-            {
-                Console.WriteLine(input[i]);
-            }
+            //PrintReverse("Viaan");
+            //char[] s = new char[] { 'h', 'e', 'l', 'l', 'o' };
+            //ReverseArray(s);
 
+            //var result = LengthOfLongestSubstring("babad");
 
-            //Console.WriteLine(result);
+            var histogram = new Historgram();
+            var result = histogram.LargestRectangle(new int[] { 2, 1, 5, 6, 2, 3});
 
+            Console.WriteLine(result);
             Console.ReadLine();  
         }
 
@@ -951,7 +956,80 @@ namespace ConsoleApp1
             }
             return maxSize;
         }
+
+
+        private bool BinarySearchTest(int[] a, int f,int start, int end)
+        {
+            if ((a.Length < 1) || a == null) return false;
+            
+            if (start > end) return false;
+
+            int m = (start + end) / 2;
+
+            if (a[m] == f) return true;
+
+            if (f > a[m])
+            {
+                return BinarySearchTest(a, f, m + 1, end);
+            }
+            else
+            {
+                return BinarySearchTest(a, f, start, m - 1);
+            }
+        }
+
+        private static void PrintReverse(string s)
+        {
+            PrintReverse(s, 0);
+        }
+
+        private static void PrintReverse(string s, int index)
+        {
+            if (s == null || index >= s.Length) return;
+
+            PrintReverse(s, index + 1);
+
+            Console.WriteLine(s[index]);
+        }
+
+
+        private static void ReverseArray(char[] s)
+        {
+            ReverseArray(s, 0, s.Length -1);
+        }
+
+        private static void ReverseArray(char[] s, int start, int end)
+        {
+            if (start > end) return;
+
+            char t = s[start];
+            s[start] = s[end];
+            s[end] = t;
+
+            ReverseArray(s, start + 1, end -1);
+
+        }
+
+        public static int LengthOfLongestSubstring(string s)
+        {
+            var result = 0;
+            var list = new List<char>();
+
+            for (var i = 0; i < s.Length; i++)
+            {
+                var pos = list.IndexOf(s[i]);
+                if (pos != -1)
+                {
+                    list.RemoveRange(0, pos + 1);
+                }
+                list.Add(s[i]);
+                result = Math.Max(result, list.Count);
+            }
+            return result;
+        }
     }
+
+
 
 
     class CakeType
