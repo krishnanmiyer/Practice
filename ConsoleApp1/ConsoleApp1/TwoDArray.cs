@@ -59,6 +59,8 @@ namespace ConsoleApp1
     //    }
 
 
+
+
     public class Historgram
     {
         public int LargestRectangle(int[] heights)
@@ -113,6 +115,37 @@ namespace ConsoleApp1
             }
 
             return max;
+        }
+
+        public int MaximalSquare(string[][] matrix)
+        {
+            int h = matrix.Length;
+            int w = matrix[0].Length;
+            int[][] aux = new int[h][];
+
+            int result = 0;
+            for (int r = 0; r < h; r++)
+            {
+                for (int c = 0; c < w; c++)
+                {
+                    if (matrix[r][c] == "1")
+                    {
+                        if (aux[r]==null)
+                        {
+                            aux[r] = new int[w];
+                        }
+                        aux[r][c] = 1;
+
+                        if (r > 0 && c > 0)
+                        {
+                            aux[r][c] = 1 + Math.Min(aux[r - 1][c], Math.Min(aux[r][c - 1], aux[r - 1][c - 1]));
+                        }
+                        result = Math.Max(result, aux[r][c]);
+                    }
+                }
+            }
+
+            return result * result;
         }
     }
 }

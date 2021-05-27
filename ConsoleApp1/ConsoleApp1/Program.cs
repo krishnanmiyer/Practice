@@ -103,14 +103,54 @@ namespace ConsoleApp1
             //var result = LengthOfLongestSubstring("babad");
 
             var histogram = new Historgram();
-            var result = histogram.LargestRectangle(new int[] { 2, 1, 5, 6, 2, 3});
+            //var result = histogram.LargestRectangle(new int[] { 2, 1, 5, 6, 2, 3});
 
-            Console.WriteLine(result);
+            //char[] input = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+            ////char[] input = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p' };
+            //PrintVertical(input, 4);
+
+            //int[] nums = new int[] { 8, 7, 4, 3 };
+
+            //Console.WriteLine(GetXorOfAllElements(nums));
+
+            //_ = RestoreIpAddresses("25525511135");
+
+            //int[][] test = new int[3][];
+            //test[0] = new int[] { 1, 3, 5, 7 };
+            //test[1] = new int[] { 10, 11, 16, 20 };
+            //test[2] = new int[] { 23, 30, 34, 60 };
+
+            //var result = SearchMatrix(test, 13);
+
+            //var result1 = FindDisapperingNumbers(new int[] { 1, 3, 3, 4 });
+            //var result = string.Join(",", result1);
+            //var result1 = MergeTwoUnSortedArrays(new int[] { 3, 5, 8 }, new int[] { 2, 7, 9 });
+
+            //var input = new string[][] { new string[]{ "1", "0", "1", "0", "0" }, new string[] { "1", "0", "1", "1", "1" }, new string[] { "1", "1", "1", "1", "1" }, new string[] { "1", "0", "0", "1", "0" } };
+            //var result = histogram.MaximalSquare(input);
+
+
+            //int[][] alist = new int[10][];
+
+            //List<int[]> list = new List<int[]> { };
+
+            //List<int> list2 = new List<int>();
+
+            //list.Add(list2.ToArray());
+
+            //alist = list.ToArray();
+
+            //List<List<int>> a = new List<List<int>>();
+
+            //alist = a.Select(b => b.ToArray()).ToArray();
+
+
+
+            Console.WriteLine() ;
             Console.ReadLine();  
         }
 
-
-        public static bool IsValid(String s)
+        public static bool IsValidStr(String s)
         {
             if (s == null || s.Length < 1) return true;
             Stack<char> a = new Stack<char>();
@@ -269,7 +309,7 @@ namespace ConsoleApp1
             {
                 while (current > k && start < i - 1)
                 {
-                    current = current - a[start];
+                    current -= a[start];
                     start++;
                 }
 
@@ -278,7 +318,7 @@ namespace ConsoleApp1
                     Console.WriteLine("Sum found between {0} and {1}", start, i - 1);
                     return 1;
                 }
-                current = current + a[i];
+                current += a[i];
             }
             Console.WriteLine("No Subarray found");
             return 0;
@@ -608,55 +648,6 @@ namespace ConsoleApp1
             public LinkedListNode Next;
         }
 
-        public static bool IsLinkedListCircular(LinkedListNode node)
-        {
-            if (node == null)
-            {
-                return false;
-            }
-
-            LinkedListNode hare = node;
-            LinkedListNode tortoise = node;
-
-            while (hare != null)
-            {
-                tortoise = tortoise.Next;
-                hare = hare.Next.Next;
-
-                if (hare == tortoise)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public static LinkedListNode FindFromEnd(LinkedListNode node, int k)
-        {
-            if (node == null)
-            {
-                return null;
-            }
-
-            LinkedListNode lead = node;
-            LinkedListNode current = node;
-
-            int count = 0;
-
-            while (lead != null)
-            {
-                lead = lead.Next;
-                count++;
-
-                if (count > 5)
-                {
-                    current = current.Next;
-                }
-            }
-            return current;
-        }
-
-
         static Heap heap = new Heap();
         public static Heap BuildHeap(int[] a, int i)
         {
@@ -736,7 +727,6 @@ namespace ConsoleApp1
             }
         }
 
-        
         public static int getRegionSize(int[][] matrix, int row, int col)
         {
             if (row < 0 || col < 0 || row >= matrix.GetLength(0) || col >= matrix.GetLength(1))
@@ -957,7 +947,6 @@ namespace ConsoleApp1
             return maxSize;
         }
 
-
         private bool BinarySearchTest(int[] a, int f,int start, int end)
         {
             if ((a.Length < 1) || a == null) return false;
@@ -1027,9 +1016,184 @@ namespace ConsoleApp1
             }
             return result;
         }
+
+        private static void PrintVertical(char[] input, int size)
+        {
+            if (input == null || input.Length <= 0) return;
+
+            for (int i = 0; i < input.Length/size; i++)
+            {
+                Console.WriteLine(PrintVertical(input, i, size));
+            }
+        }
+
+        private static string PrintVertical(char[] input, int start, int size)
+        {
+            StringBuilder s = new StringBuilder();
+
+            int index = start;
+
+            for (int i = 1; i <= size; i++)
+            {
+                s.Append(input[index]);
+
+                index += size;
+            }
+
+            return s.ToString();
+        }
+
+
+        private static int GetXorOfAllElements(int[] a)
+        {
+            int result = 0;
+
+            for(int i = 0; i < a.Length; i++)
+            {
+                result ^= a[i];
+            }
+
+            return result;
+        }
+
+        public static IList<string> RestoreIpAddresses(string s)
+        {
+            IList<string> ans = new List<string>();
+
+            if (s.Length > 12)
+                return ans;
+
+            Backtrack(s, 0, new List<string>(), ans);
+            return ans;
+        }
+
+        private static void Backtrack(string s, int st, IList<string> li, IList<string> ans)
+        {
+            if (st == s.Length && li.Count == 4)
+            {
+                string ip = string.Join(".", li.ToArray());
+                ans.Add(ip);
+                return;
+            }
+
+            for (int len = 1; len <= s.Length - st; len++)
+            {
+                string str = s.Substring(st, len);
+
+                if (IsValid(str))
+                {
+                    li.Add(str);
+                    Backtrack(s, st + len, li, ans);
+                    li.RemoveAt(li.Count - 1);
+                }
+            }
+        }
+
+        private static bool IsValid(string str)
+        {
+            if (str.Length > 3)
+                return false;
+
+            int num = int.Parse(str);
+
+            if (num < 0 || num > 255 || str.Length != num.ToString().Length)
+                return false;
+
+            return true;
+        }
+
+        public static bool SearchMatrix(int[][] matrix, int target)
+        {
+            if (matrix.Length < 1) return false;
+
+            int i = 0; int j = 0;
+
+            while (i < matrix.Length)
+            {
+                if (matrix[i][j] < target && (matrix[i].Length > 1 && j < matrix[i].Length))
+                {
+                    j++;
+                }
+                else if (matrix[i][j] > target)
+                {
+                    return false;
+                }
+                else if (matrix[i][j] == target)
+                {
+                    return true;
+                }
+                else
+                {
+                    i++;
+                    j = 0;
+                }
+            }
+
+            return false;
+        }
+    
+        public static List<int> FindDisapperingNumbers(int[] n)
+        {
+            for (int i = 0; i < n.Length; i++)
+            {
+                int j = Math.Abs(n[i]) - 1;
+                n[j] = Math.Abs(n[j]) * -1;
+            }
+
+            var result = new List<int>();
+            for (int i = 0; i < n.Length; i++)
+            {
+                if (n[i] >  0)
+                {
+                    result.Add(i + 1);
+                }
+            }
+            return result;
+        }
+
+        private static int[] MergeTwoUnSortedArrays(int[] a, int[] b)
+        {
+            int[] c = new int[a.Length + b.Length];
+
+            int i = 0; int j = 0; int k = 0;
+
+            while(i < a.Length && j < b.Length)
+            {
+                if (a[i] < b[j])
+                {
+                    c[k] = a[i];
+                    i++;
+                }
+                else
+                {
+                    c[k] = b[j];
+                    j++;
+                }
+                k++;
+            }
+
+            if (i < a.Length)
+            {
+                while(i < a.Length)
+                {
+                    c[k] = a[i];
+                    i++;
+                }
+            }
+
+            if (j < b.Length)
+            {
+                while (j < b.Length)
+                {
+                    c[k] = b[j];
+                    j++;
+                }
+            }
+
+            Array.Sort(c);
+            return c;
+        }
     }
-
-
 
 
     class CakeType

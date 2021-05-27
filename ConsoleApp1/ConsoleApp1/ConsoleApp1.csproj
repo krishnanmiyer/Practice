@@ -37,6 +37,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LinkedListProblems.cs" />
+    <Compile Include="MeetingSchedules.cs" />
     <Compile Include="Sorting.cs" />
     <Compile Include="TileProblem.cs" />
     <Compile Include="TwoDArray.cs" />
