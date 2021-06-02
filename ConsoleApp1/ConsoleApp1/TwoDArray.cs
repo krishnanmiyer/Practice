@@ -7,6 +7,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ConsoleApp1
 {
@@ -146,6 +147,53 @@ namespace ConsoleApp1
             }
 
             return result * result;
+        }
+    
+        public int[][][] FindRectangles(int[][] input)
+        {
+            if (input.Length == 0) return new int[0][][];
+
+            List<int[][]> result = new List<int[][]>();
+
+            for(int i=0; i < input.Length; i++)
+            {
+                for(int j = 0; j < input[i].Length; j++)
+                {
+                    if (input[i][j] == 0)
+                    {
+                        result.Add(new int[2][] { new int[] { i, j }, new int[] { i, j } });
+                        input[i][j] = 1;
+                        GetPixes(input, i, j, result);
+                    }
+                }
+            }
+
+            return result.ToArray();
+        }
+
+        private void GetPixes(int[][] input, int row, int col, List<int[][]> result)
+        {
+            int maxi = row, maxj = col;
+
+            for (int i = row; i < input.Length; i++)
+            {
+                for (int j = col; j < input[i].Length; j++)
+                {
+                    if (input[i][j] == 0)
+                    {
+                        maxi = i;
+                        maxj = j;
+                        input[i][j] = 1;
+                    }
+                    else
+                    {
+                        var items = result[result.Count - 1];
+                        items[1][0] = maxi;
+                        items[1][1] = maxj;
+                        return;
+                    }
+                }
+            }
         }
     }
 }

@@ -20,10 +20,13 @@ namespace ConsoleApp1
 
             //2. Loop through the time and find all time where  there is different end time of prev and start time of next
             List<int[]> result = new List<int[]>();
+            int maxEnd = 0;
 
             for(int i = 1; i < input.Length; i++)
             {
-                if (input[i - 1][1] < input[i][0])
+                maxEnd = Math.Max(input[i - 1][1], maxEnd);
+
+                if (maxEnd < input[i][0])
                 {
                     //3. Add resulting difference to a output array
                     result.Add(new int[] { input[i - 1][1], input[i][0] });

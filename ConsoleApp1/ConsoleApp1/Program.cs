@@ -102,18 +102,28 @@ namespace ConsoleApp1
 
             //var result = LengthOfLongestSubstring("babad");
 
-            var histogram = new Historgram();
-            //var result = histogram.LargestRectangle(new int[] { 2, 1, 5, 6, 2, 3});
+            //var histogram = new Historgram();
+            ////var result = histogram.LargestRectangle(new int[] { 2, 1, 5, 6, 2, 3});
+
+            //var image4 = new int[5][]
+            //{
+            //    new int[] { 1, 1, 1, 1, 1},
+            //    new int[] { 1, 0, 0, 0, 1},
+            //    new int[] { 1, 0, 0, 0, 1},
+            //    new int[] { 1, 0, 0, 0, 1},
+            //    new int[] { 1, 1, 1, 1, 1}
+            //};
+
+            //var result = histogram.FindRectangles(image4);
 
             //char[] input = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
             ////char[] input = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p' };
             //PrintVertical(input, 4);
 
+            //_ = RestoreIpAddresses("255255111
             //int[] nums = new int[] { 8, 7, 4, 3 };
 
-            //Console.WriteLine(GetXorOfAllElements(nums));
-
-            //_ = RestoreIpAddresses("25525511135");
+            //Console.WriteLine(GetXorOfAllE35");
 
             //int[][] test = new int[3][];
             //test[0] = new int[] { 1, 3, 5, 7 };
@@ -144,11 +154,52 @@ namespace ConsoleApp1
 
             //alist = a.Select(b => b.ToArray()).ToArray();
 
+            //var result = Backtracking.SumOfSubsets(new int[] { 5, 10, 12, 13, 15, 18}, 30);
 
 
-            Console.WriteLine() ;
+            var p1_meetings = new int[3][] { new int[] { 1230, 1300 }, new int[] { 845, 900 }, new int[] { 1300, 1500 } };
+            var p2_meetings = new int[4][] { new int[] { 0, 844 }, new int[] { 930, 1200 }, new int[] { 1515, 1546 }, new int[] { 1600, 2400 } };
+            var p3_meetings = new int[3][] { new int[] { 845, 915 }, new int[] { 1515, 1545 }, new int[] { 1235, 1245 } };
+            var p4_meetings = new int[3][] { new int[] { 1, 5 }, new int[] { 844, 900 }, new int[] { 1515, 1600 } };
+
+            var input = Enumerable.Concat(p2_meetings, p4_meetings);
+
+            var result = MeetingSchedules.FindFreeTime(input.ToArray());
+
+            for (int i = 0; i < result.Length; i++)
+            {
+                Console.Write("Element({0}): ", i + 1);
+                for (int j = 0; j < result[i].Length; j++)
+                {
+                    Console.Write(result[i][j] + "\t");
+                }
+                Console.WriteLine();
+            }
+
+            //var result = reverseInt(102);
+            Console.Write(result);
             Console.ReadLine();  
         }
+
+        private static int reverseInt(int x)
+        {
+            int result = 0;
+            int y = x;
+            while (y != 0)
+            {
+                int digit = y % 10;
+                y /= 10;
+                result = result * 10 + digit;
+            }
+
+            if (x < 0)
+            {
+                result = -result;
+            }
+            return result;
+        }
+
+
 
         public static bool IsValidStr(String s)
         {
